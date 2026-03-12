@@ -93,7 +93,10 @@ let mediaIg = 0;
 let mediaYt = 0;
 
 function mean(dato) {
-    for (let i = 0; i < dato.length; i++)
-        mediaTikTok = dato 
-    return media
+    let total = dato.reduce((a, b) => a + b, 0);
+    let media = total / dato.length;
+    return media;
 }
+console.log(mean(recentTikTokViews));
+console.log(mean(recentInstagramViews));
+console.log(mean(recentYouTubeViews));

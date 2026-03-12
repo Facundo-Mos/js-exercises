@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apuntes sobre el DOM</title>
+    <style>
+        body {
+            background-color: #0b1120;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+            max-width: 800px;
+        }
+        h1, h2 {
+            font-family: 'Courier New', Courier, monospace;
+            color: #ffffff;
+            margin-top: 40px;
+        }
+        h1::before {
+            content: "# ";
+            color: #3b82f6; /* Color azul para el hashtag */
+        }
+        h2::before {
+            content: "## ";
+            color: #3b82f6;
+        }
+        code {
+            background-color: #334155;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #e2e8f0;
+        }
+        .comment {
+            color: #94a3b8;
+        }
+        .string {
+            color: #fca5a5;
+        }
+        .method {
+            color: #93c5fd;
+        }
+        .image-placeholder {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>El DOM</h1>
+    
+    <p>El HTML de un sitio web puede considerarse como un árbol. Dentro del archivo del documento, se encuentra el elemento raíz <code>&lt;html&gt;</code>. De este elemento raíz surgen las dos ramas principales: los elementos <code>&lt;head&gt;</code> y <code>&lt;body&gt;</code>.</p>
+    
+    <p>Esto se puede visualizar como un árbol al revés, como se muestra a continuación:</p>
+    
+    <div class="image-placeholder">
+        <img src="6-trifecta\02-el-dom\img\Captura de pantalla 2026-03-12 235749.png" alt="">
+    </div>
+
+    <p>Esto se conoce como Modelo de Objetos de Documento o <strong>DOM</strong>. Desde la perspectiva del navegador, el DOM es una familia de árboles que representan cómo se organizan y relacionan los elementos HTML de un sitio.</p>
+
+    <h1>El objeto del documento</h1>
+
+    <p>Al visitar un sitio, se crea un nuevo árbol DOM. Cada elemento bajo los elementos <code>&lt;head&gt;</code> y <code>&lt;body&gt;</code> es como una fruta que cuelga del árbol.</p>
+
+    <p>¡Con JavaScript, podemos acceder a cualquiera de estos elementos con un objeto especial <code>document</code>!</p>
+
+    <p>Suponiendo que el siguiente código está vinculado con un archivo HTML:</p>
+
+    <pre><code><span class="method">console.log</span>(document);</code></pre>
+
+    <p>¡<em>Todo</em> lo que se encuentre en ese archivo HTML se registrará en la consola! 🤯</p>
+
+    <h2>.querySelector()</h2>
+
+    <p>Descubrirás que <code>document</code> es muy potente. Con él, puedes seleccionar cualquier elemento del HTML mediante métodos. Uno de ellos es <code>.querySelector()</code>.</p>
+
+    <pre><code><span class="comment">// Select by element name</span>
+document.<span class="method">querySelector</span>(<span class="string">"p"</span>);
+
+<span class="comment">// Select by class name</span>
+document.<span class="method">querySelector</span>(<span class="string">".class-name"</span>);
+
+<span class="comment">// Select by id name</span>
+document.<span class="method">querySelector</span>(<span class="string">"#id-name"</span>);</code></pre>
+
+    <p>Se pasa una cadena al método <code>.querySelector()</code> que representa un elemento y se devuelve la primera instancia de dicho elemento. Esta cadena puede ser el nombre del elemento, un nombre de <code>class</code> o un nombre de <code>id</code>.</p>
+
+    <h2>.innerHTML</h2>
+
+    <p>No solo puedes acceder a los elementos con métodos DOM, sino que también puedes acceder al contenido de esos elementos con propiedades como <code>.innerHTML</code>:</p>
+
+    <pre><code>document.<span class="method">querySelector</span>(<span class="string">"div"</span>).innerHTML;
+<span class="comment">// &lt;p&gt;Howdy!&lt;/p&gt;</span></code></pre>
+
+</body>
+</html>
