@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica del DOM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background-color: #f4f4f9;
+        }
+        .caja {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="caja">
+        <h2>Ejemplo 1: Magia con un clic 🪄</h2>
+        <p id="mensaje-magico">Soy un texto normal y aburrido.</p>
+        
+        <button id="boton-magia">¡Cambiar el texto!</button>
+    </div>
+
+
+    <div class="caja">
+        <h2>Ejemplo 2: Copiar y pegar invisible 🕵️‍♂️</h2>
+        <p id="texto-original">Este es el mensaje secreto: "¡JavaScript es genial!"</p>
+        
+        <p id="texto-destino"><em>(Aquí aparecerá el mensaje secreto...)</em></p>
+        
+        <button id="boton-revelar">Revelar secreto</button>
+    </div>
+
+
+    <script>
+        // --- CÓDIGO DEL EJEMPLO 1 ---
+        // 1. Seleccionamos el botón usando su ID
+        let miBoton = document.getElementById("boton-magia");
+
+        // 2. Le decimos qué hacer cuando le hagamos clic
+        miBoton.onclick = function() {
+            // 3. Seleccionamos el párrafo y cambiamos su .innerText
+            document.getElementById("mensaje-magico").innerText = "¡Tachán! Ahora soy un texto increíble gracias al DOM. ✨";
+        };
+
+
+        // --- CÓDIGO DEL EJEMPLO 2 ---
+        // 1. Seleccionamos el botón de revelar
+        let botonRevelar = document.getElementById("boton-revelar");
+
+        // 2. Le damos la instrucción para el clic
+        botonRevelar.onclick = function() {
+            // 3. Guardamos el texto del primer párrafo en una variable usando .innerText
+            let textoGuardado = document.getElementById("texto-original").innerText;
+            
+            // 4. Inyectamos ese texto en el segundo párrafo
+            document.getElementById("texto-destino").innerText = "Mensaje revelado: " + textoGuardado;
+        };
+    </script>
+
+</body>
+</html>

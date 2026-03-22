@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ID, Clases y Estilos</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background-color: #f8fafc;
+        }
+        /* Estilo base para todas las cajas para que se vean bonitas */
+        .caja-base { 
+            padding: 20px; 
+            margin: 10px 0; 
+            border: 2px solid #cbd5e1; 
+            border-radius: 8px; 
+            background-color: white;
+        }
+        button { 
+            padding: 10px 15px; 
+            margin-right: 10px;
+            cursor: pointer; 
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Jugando con ID, Classes y Styles 🎨</h1>
+
+    <div id="caja-vip" class="caja-base">
+        👑 Soy la caja VIP (Tengo el ID: "caja-vip")
+    </div>
+
+    <div class="caja-base caja-comun">
+        📦 Soy la caja común 1 (Tengo la clase: "caja-comun")
+    </div>
+    
+    <div class="caja-base caja-comun">
+        📦 Soy la caja común 2 (Tengo la clase: "caja-comun")
+    </div>
+
+    <button id="btn-vip">Modificar la caja VIP (ID)</button>
+    <button id="btn-comunes">Modificar las cajas comunes (Class)</button>
+
+    <script>
+        // --- 1. MODIFICAR POR ID ---
+        let botonVip = document.getElementById("btn-vip");
+
+        botonVip.onclick = function() {
+            // Seleccionamos un solo elemento
+            let elementoVip = document.getElementById("caja-vip");
+            
+            // Cambiamos sus estilos usando .style
+            elementoVip.style.backgroundColor = "gold";
+            elementoVip.style.color = "purple";
+            elementoVip.style.fontWeight = "bold";
+            elementoVip.style.border = "4px dashed orange";
+        };
+
+
+        // --- 2. MODIFICAR POR CLASE ---
+        let botonComunes = document.getElementById("btn-comunes");
+
+        botonComunes.onclick = function() {
+            // Obtenemos TODOS los elementos con esa clase
+            // ¡Recuerda! Esto nos da una lista (HTMLCollection)
+            let listaComunes = document.getElementsByClassName("caja-comun");
+            
+            // Modificamos el primer elemento de la lista [0]
+            listaComunes[0].style.backgroundColor = "lightblue";
+            listaComunes[0].style.color = "darkblue";
+            listaComunes[0].innerText = "¡A mí me cambiaron el color y el texto!"; // También podemos mezclar innerText
+            
+            // Modificamos el segundo elemento de la lista [1]
+            listaComunes[1].style.backgroundColor = "lightgreen";
+            listaComunes[1].style.borderRadius = "50px"; // Hacemos sus bordes redondos
+        };
+    </script>
+
+</body>
+</html>

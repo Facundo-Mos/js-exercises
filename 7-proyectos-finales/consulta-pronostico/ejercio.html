@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta el pronóstico del tiempo - Tutorial</title>
+    <style>
+        /* Estilos generales imitando la plataforma oscura */
+        body {
+            background-color: #0b1426;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1.main-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 36px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .author-info img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #475569;
+        }
+
+        .author-name {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .info-box {
+            background-color: #0c4a6e; /* Azul oscuro */
+            border: 1px solid #0284c7;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .info-label {
+            width: 200px;
+            color: #7dd3fc;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        h2 {
+            color: #6ee7b7;
+            font-size: 26px;
+            font-weight: bold;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos para código en línea */
+        code {
+            background-color: #1e293b;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        /* Estilos para los bloques de código grandes */
+        .code-block {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            color: #f8fafc;
+            font-size: 15px;
+        }
+
+        /* Simulando el botón de copiar de la esquina */
+        .copy-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 15px;
+            height: 15px;
+            border: 2px solid #64748b;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .copy-icon::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 15px;
+            height: 15px;
+            border-top: 2px solid #64748b;
+            border-right: 2px solid #64748b;
+            border-radius: 3px;
+        }
+
+        .image-placeholder {
+            background-color: #1e293b;
+            border: 1px dashed #475569;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            color: #94a3b8;
+            margin: 20px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="main-title">Consulta el pronóstico del tiempo con HTML, CSS y JavaScript.</h1>
+    <div class="info-box">
+        <div class="info-row">
+            <div class="info-label">REQUISITOS PREVIOS</div>
+            <div class="info-value">HTML, CSS, JavaScript</div>
+        </div>
+        <div class="info-row">
+            <div class="info-label">VERSIONES</div>
+            <div class="info-value">HTML5, CSS3, ES6+ (JavaScript)</div>
+        </div>
+    </div>
+
+    <h2># Introducción</h2>
+
+    <p>¿Te has preguntado alguna vez cómo algunas aplicaciones y sitios web te permiten consultar el tiempo?</p>
+
+    <p>En este tutorial, vamos a crear una aplicación web que muestre el clima actual, utilizando HTML, CSS, JavaScript y un ingrediente especial... ¡APIs!</p>
+
+    <p>Gracias a la potencia de <a href="#">Open Weather</a> y a un poco de magia de programación, podemos consultar la previsión meteorológica local.</p>
+
+    <p>Al finalizar este tutorial, habrás aprendido a:</p>
+
+    <ul>
+        <li>Obtener datos asíncronos con una clave API.</li>
+        <li>Organizar el contenido con el modelo de diseño CSS (Flexbox).</li>
+        <li>Cambiar el contenido de la página renderizada dinámicamente.</li>
+    </ul>
+
+    <p>La aplicación meteorológica final tendrá este aspecto y funcionará así:</p>
+
+    <div class="image-placeholder">[Imagen: Vista previa de la Weather App terminada]</div>
+
+    <p>¡Empecemos!</p>
+
+    <h2># Paso 1: Configuración del proyecto</h2>
+
+    <p>Primero, necesitaremos crear las carpetas y archivos que contendrán el código de nuestro proyecto. Comencemos abriendo una terminal y creando una nueva carpeta llamada <strong>weather-app</strong> usando el comando <code>mkdir</code>. Luego, accede a esta carpeta usando el comando <code>cd</code>:</p>
+
+    <div class="code-block">
+        <div class="copy-icon"></div>
+<pre>mkdir weather-app
+cd weather-app
+touch index.html styles.css script.js</pre>
+    </div>
+
+    <p>Esto creará los siguientes archivos en la carpeta <strong>weather-app</strong>:</p>
+
+    <ul>
+        <li>Un archivo <strong>index.html</strong> para renderizar la aplicación.</li>
+        <li>Un archivo <strong>styles.css</strong> para personalizar la apariencia de nuestra aplicación.</li>
+        <li>Un archivo <strong>script.js</strong> donde obtendremos nuestros datos meteorológicos.</li>
+    </ul>
+
+    <p>Volveremos a estos archivos más adelante. Pero por ahora, ¡vayamos a OpenWeather!</p>
+
+    <h2># Paso 2: Obtén la clave API de OpenWeather</h2>
+
+    <p>OpenWeather proporciona varias API (o interfaces de programación de aplicaciones) para obtener datos relacionados con el clima.</p>
+
+    <p>Si aún no lo has hecho, debes crear una cuenta de OpenWeather con un nombre de usuario, correo electrónico y contraseña:</p>
+
+    <div class="image-placeholder">[Imagen: Formulario de registro de OpenWeather]</div>
+
+    <p><strong>Nota:</strong> Recibirás un correo electrónico de verificación; ¡asegúrate de responderlo!</p>
+
+    <p>A continuación, se te pedirá que indiques qué deseas hacer con la API de OpenWeather.</p>
+
+    <div class="image-placeholder">[Imagen: Modal de selección de propósito en OpenWeather]</div>
+
+    <p>Recomiendo elegir "Educación/Ciencia" u "Otro".</p>
+
+    <p>¡Ya puedes ver tu clave API! Tras crear una nueva cuenta, se generará una nueva clave. En la esquina superior derecha, selecciona tu nombre de usuario y, a continuación, "Mis claves API" en el menú desplegable.</p>
+
+    <div class="image-placeholder">[Imagen: Pantalla de claves API generadas]</div>
+
+    <p>Una vez que hayas confirmado que tienes una clave API activa, ¡pasemos al siguiente paso!</p>
+
+    <h2># Paso 3: Escribir HTML</h2>
+
+    <p>¡Es hora de empezar a escribir código!</p>
+
+    <p>Volvamos a nuestro editor de código y abramos el archivo <strong>index.html</strong>.</p>
+
+    <p>Para empezar, añade el siguiente código HTML:</p>
+
+    <div class="code-block">
+        <div class="copy-icon"></div>
+<pre><span style="color: #cbd5e1;">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #6ee7b7;">&lt;html</span> <span style="color: #fde047;">lang=</span><span style="color: #fca5a5;">"en"</span><span style="color: #6ee7b7;">&gt;</span>
+<span style="color: #6ee7b7;">&lt;head&gt;</span>
+  <span style="color: #6ee7b7;">&lt;link</span> <span style="color: #fde047;">href=</span><span style="color: #fca5a5;">"styles.css"</span> <span style="color: #fde047;">rel=</span><span style="color: #fca5a5;">"stylesheet"</span> <span style="color: #6ee7b7;">/&gt;</span>
+  <span style="color: #6ee7b7;">&lt;title&gt;</span>Weather App<span style="color: #6ee7b7;">&lt;/title&gt;</span>
+<span style="color: #6ee7b7;">&lt;/head&gt;</span>
+<span style="color: #6ee7b7;">&lt;body&gt;</span>
+
+<span style="color: #6ee7b7;">&lt;/body&gt;</span>
+<span style="color: #6ee7b7;">&lt;/html&gt;</span></pre>
+    </div>
+
+    <p>Además de la declaración <code>&lt;!DOCTYPE html&gt;</code> necesaria, hemos incluido un elemento <code>&lt;link&gt;</code> en el <code>&lt;head&gt;</code> para conectar nuestro HTML con nuestro archivo <strong>styles.css</strong> (en el que trabajaremos en el siguiente paso).</p>
+
+    <p>A continuación, agreguemos el siguiente código HTML dentro del elemento <code>&lt;body&gt;</code>:</p>
+
+    <div class="code-block">
+        <div class="copy-icon"></div>
+<pre><span style="color: #6ee7b7;">&lt;body&gt;</span>
+  <span style="color: #6ee7b7;">&lt;main&gt;</span>
+    <span style="color: #6ee7b7;">&lt;section</span> <span style="color: #fde047;">id=</span><span style="color: #fca5a5;">"weather-wrapper"</span><span style="color: #6ee7b7;">&gt;</span>
+      <span style="color: #6ee7b7;">&lt;h1&gt;</span>Weather App<span style="color: #6ee7b7;">&lt;/h1&gt;</span>
+      <span style="color: #6ee7b7;">&lt;div</span> <span style="color: #fde047;">id=</span><span style="color: #fca5a5;">"weather-search"</span><span style="color: #6ee7b7;">&gt;</span>
+        <span style="color: #6ee7b7;">&lt;input</span> <span style="color: #fde047;">id=</span><span style="color: #fca5a5;">"search"</span> <span style="color: #fde047;">type=</span><span style="color: #fca5a5;">"text"</span> <span style="color: #fde047;">placeholder=</span><span style="color: #fca5a5;">"Search by city"</span> <span style="color: #6ee7b7;">/&gt;</span>
+        <span style="color: #6ee7b7;">&lt;input</span> <span style="color: #fde047;">id=</span><span style="color: #fca5a5;">"submit"</span> <span style="color: #fde047;">type=</span><span style="color: #fca5a5;">"submit"</span> <span style="color: #fde047;">onclick=</span><span style="color: #fca5a5;">"fetchWeather()"</span> <span style="color: #fde047;">value=</span><span style="color: #fca5a5;">"Search"</span> <span style="color: #6ee7b7;">/&gt;</span>
+      <span style="color: #6ee7b7;">&lt;/div&gt;</span>
+      <span style="color: #6ee7b7;">&lt;div</span> <span style="color: #fde047;">id=</span><span style="color: #fca5a5;">"weather-data"</span> <span style="color: #fde047;">style=</span><span style="color: #fca5a5;">"display: none;"</span><span style="color: #6ee7b7;">&gt;&lt;/div&gt;</span>
+    <span style="color: #6ee7b7;">&lt;/section&gt;</span>
+  <span style="color: #6ee7b7;">&lt;/main&gt;</span>
+  <span style="color: #6ee7b7;">&lt;script</span> <span style="color: #fde047;">src=</span><span style="color: #fca5a5;">"script.js"</span><span style="color: #6ee7b7;">&gt;&lt;/script&gt;</span>
+<span style="color: #6ee7b7;">&lt;/body&gt;</span></pre>
+    </div>
+
+    <p>El elemento <code>&lt;main&gt;</code> contiene toda la estructura de nuestra aplicación e incluye un elemento <code>&lt;section&gt;</code> con lo siguiente:</p>
+
+    <ul>
+        <li>Un elemento de encabezado <code>&lt;h1&gt;</code>.</li>
+        <li>Un elemento <code>&lt;div&gt;</code> con dos componentes <code>&lt;input&gt;</code> para buscar el clima por ciudad.</li>
+        <li>El otro campo <code>&lt;div&gt;</code> está vacío por ahora, pero se rellenará con los datos que devuelva la función <code>fetchWeather()</code> que escribiremos más adelante.</li>
+    </ul>
+
+    <p>También añadimos un elemento <code>&lt;script&gt;</code> para conectar nuestro HTML con el archivo <strong>script.js</strong>.</p>
+
+    <p><strong>Nota:</strong> El elemento <code>&lt;script&gt;</code> se escribe antes de la etiqueta de cierre <code>&lt;/body&gt;</code> para garantizar que todo el HTML se cargue y sea accesible para JavaScript.</p>
+
+    <p>Si guardamos el archivo <strong>index.html</strong> y lo abrimos en el navegador, debería verse así:</p>
+
+    <div class="image-placeholder" style="background-color: white; color: black; border: none; text-align: left; padding: 20px;">
+        <h2>Weather App</h2>
+        <input type="text" placeholder="Search by city"> <input type="button" value="Search">
+    </div>
+
+    <p>Ahora mismo tiene un aspecto bastante básico. ¡Pero no te preocupes! Nos ocuparemos de eso en el siguiente paso.</p>
+
+    <h2># Paso 4: Escribir CSS</h2>
+
+    <p>¡Vamos a darle un toque especial a nuestra aplicación del tiempo dándole estilo con CSS!</p>
+
+    <p>En la mayor parte de este paso, utilizaremos CSS estándar. Sin embargo, también usaremos un modelo de diseño interesante para CSS llamado Flexbox para organizar el contenido de nuestra aplicación.</p>
+
+    <p>Dentro de nuestro archivo <strong>styles.css</strong>, comencemos agregando lo siguiente:</p>
+
+    <div class="code-block">
+        <div class="copy-icon"></div>
+<pre><span style="color: #93c5fd;">*</span> {
+  <span style="color: #93c5fd;">margin:</span> 0;
+  <span style="color: #93c5fd;">padding:</span> 0;
+  <span style="color: #93c5fd;">box-sizing:</span> border-box;
+}
+
+<span style="color: #93c5fd;">body</span> {
+  <span style="color: #93c5fd;">background-image:</span> url(https://bit.ly/4bcK1Hc);
+  <span style="color: #93c5fd;">background-repeat:</span> no-repeat;
+  <span style="color: #93c5fd;">background-size:</span> cover;
+  <span style="color: #93c5fd;">font-family:</span> 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  <span style="color: #93c5fd;">height:</span> 100vh;
+}</pre>
+    </div>
+
+    <p>Esto es lo que hicimos en el fragmento anterior:</p>
+
+    <ul>
+        <li>Primero, seleccionamos todo (es decir, <code>*</code>), estableciendo por defecto <code>margin</code> y <code>padding</code> a cero, y factorizando el <code>padding</code> y <code>border</code> en tamaños de elementos con <code>box-sizing: border-box</code>.</li>
+        <li>Luego, hacemos que el <code>body</code> tenga la misma altura que la pantalla en la que se renderiza con <code>100vh</code>. También configuramos su información <code>font-family</code>, con una fuente <code>sans-serif</code> predeterminada.</li>
+        <li>Por último, configuramos <code>background-image</code> pasando un enlace de imagen de Brooklyn (donde tiene su sede Codedex) a la función <code>url()</code>. ¡Siéntete libre de usar tu propia imagen!</li>
+    </ul>
+
+    <p>A continuación, vamos a seleccionar el elemento <code>&lt;main&gt;</code> y añadirle los siguientes estilos:</p>
+
+    <div class="code-block">
+        <div class="copy-icon"></div>
+<pre><span style="color: #93c5fd;">main</span> {
+  <span style="color: #93c5fd;">background-color:</span> rgba(227, 193, 173, 0.85);
+  <span style="color: #93c5fd;">position:</span> relative;
+  <span style="color: #93c5fd;">top:</span> 30%;
+  <span style="color: #93c5fd;">border:</span> 1px solid;
+  <span style="color: #93c5fd;">border-radius:</span> 5px;
+  <span style="color: #93c5fd;">min-width:</span> 540px;
+  <span style="color: #93c5fd;">max-width:</span> 50%;
+  <span style="color: #93c5fd;">margin:</span> auto;
+  <span style="color: #93c5fd;">padding:</span> 2em;
+}
+
+<span style="color: #93c5fd;">h1</span> {
+  <span style="color: #93c5fd;">margin-bottom:</span> 20px;
+}</pre>
+    </div>
+
+    <p>Aplicamos el siguiente estilo al elemento <code>&lt;main&gt;</code>:</p>
+
+    <ul>
+        <li>Añadimos un valor RGB para <code>background-color</code>, así como un cuarto valor (alfa) que hace que el elemento sea un 85% "opaco" (o 15% transparente).</li>
+        <li>Se le asignó una posición <code>relative</code> y se colocó al 30% del borde <code>top</code> de la pantalla.</li>
+        <li>Se agregaron algunas configuraciones de modelo de caja, incluyendo <code>border</code>, <code>border-radius</code> y <code>padding</code>.</li>
+        <li>Le dimos un tamaño mínimo <code>min-width</code> de 540 píxeles y un ancho máximo <code>max-width</code> del 50%.</li>
+        <li>Dado que el elemento <code>&lt;main&gt;</code> es un elemento de bloque, lo centramos con <code>margin: auto</code>.</li>
+    </ul>
+
+    <p>Por último, añadimos algo de espacio debajo del elemento <code>h1</code> con <code>margin-bottom</code>.</p>
+
+    <p>Guardemos nuestro archivo <strong>styles.css</strong>. En este punto, nuestra aplicación del tiempo renderizada debería verse así:</p>
+
+    <div class="image-placeholder">[Imagen: Aplicación centrada con fondo transparente sobre la imagen de Brooklyn]</div>
+
+    <p>Ahora, hagamos que los elementos <code>&lt;input&gt;</code> parezcan más grandes para que coincidan mejor con el encabezado <code>&lt;h1&gt;</code> que está encima de ellos. Selecciona estos elementos con <code>#search</code> y <code>#submit</code>, y agrega lo siguiente:</p>
+
+    <div class="code-block">
+        <div class="copy-icon"></div>
+<pre><span style="color: #93c5fd;">#search</span> {
+  <span style="color: #93c5fd;">border-radius:</span> 5px 0 0 5px;
+  <span style="color: #93c5fd;">border:</span> none;
+  <span style="color: #93c5fd;">padding:</span> 10px;
+  <span style="color: #93c5fd;">font-size:</span> 16px;
+  <span style="color: #93c5fd;">width:</span> 70%;
+  <span style="color: #93c5fd;">height:</span> 42px;
+}
+
+<span style="color: #93c5fd;">#submit</span> {
+  <span style="color: #93c5fd;">border-radius:</span> 0 5px 5px 0;
+  <span style="color: #93c5fd;">padding:</span> 10px;
+  <span style="color: #93c5fd;">font-size:</span> 16px;
+  <span style="color: #93c5fd;">width:</span> 5em;
+  <span style="color: #93c5fd;">cursor:</span> pointer;
+}</pre>
+    </div>
+
+    <p>Ambos elementos obtienen los mismos estilos para <code>padding</code> y <code>font-size</code>.</p>
+
+    <p>El elemento <code>#search</code> obtiene un 70% de <code>width</code>, así como un <code>height</code> de 42px y ningún <code>border</code>.</p>
+
+    <p>El elemento <code>#submit</code> obtiene un <code>width</code> de 5em junto con un estilo <code>cursor: pointer</code> que hace que la flecha se convierta en una mano que señala mientras se desplaza sobre este elemento.</p>
+
+    <p>Guardemos <strong>styles.css</strong> y volvamos a renderizar la página:</p>
+
+    <div class="image-placeholder">[Imagen: Inputs estilizados juntos en forma de barra de búsqueda unificada]</div>
+
+    <p>A continuación, vamos a aplicar CSS Flexbox para centrar fácilmente el contenido de nuestra aplicación meteorológica.</p>
+
+    <p>Selecciona los elementos <code>#weather-wrapper</code> y <code>#weather-search</code> y agrega lo siguiente:</p>
+
+    <div class="code-block">
+        <div class="copy-icon"></div>
+<pre><span style="color: #93c5fd;">#weather-wrapper</span> {
+  <span style="color: #93c5fd;">display:</span> flex;
+}
+
+<span style="color: #93c5fd;">#weather-search</span> {
+  <span style="color: #93c5fd;">display:</span> flex;
+}</pre>
+    </div>
+
+    <p>Esto convierte los elementos <code>#weather-wrapper</code> y <code>#weather-search</code> en contenedores flexibles. Por lo tanto, sus elementos secundarios se convierten en elementos flexibles que podemos alinear con ciertas propiedades.</p>
+
+    <p>Actualiza estos elementos con lo siguiente:</p>
+
+    <div class="code-block">
+        <div class="copy-icon"></div>
+<pre><span style="color: #93c5fd;">#weather-wrapper</span> {
+  <span style="color: #93c5fd;">display:</span> flex;
+  <span style="color: #93c5fd;">flex-direction:</span> column;
+  <span style="color: #93c5fd;">place-items:</span> center;
+  <span style="color: #93c5fd;">justify-content:</span> space-between;
+}
+
+<span style="color: #93c5fd;">#weather-search</span> {
+  <span style="color: #93c5fd;">display:</span> flex;
+  <span style="color: #93c5fd;">width:</span> 50%;
+}</pre>
+    </div>
+
+    <p>Por defecto, los elementos flex se muestran en una fila. Pero cambiamos esto para el elemento <code>#weather-wrapper</code> estableciendo <code>flex-direction</code> en <code>column</code>.</p>
+
+    <p>Para centrar los elementos, utilizamos la propiedad <code>place-items</code>. También hicimos que el elemento <code>#weather-search</code> tuviera la mitad del ancho (50%) de su elemento padre <code>#weather-wrapper</code>.</p>
+
+</div>
+
+</body>
+</html>

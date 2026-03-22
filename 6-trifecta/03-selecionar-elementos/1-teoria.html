@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar y Actualizar Elementos HTML</title>
+    <style>
+        body {
+            background-color: #0b1120;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+            max-width: 900px;
+        }
+        .main-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        h1, h2 {
+            font-family: 'Courier New', Courier, monospace;
+            color: #ffffff;
+            margin-top: 40px;
+        }
+        h1::before {
+            content: "# ";
+            color: #3b82f6;
+        }
+        h2::before {
+            content: "## ";
+            color: #3b82f6;
+        }
+        code {
+            background-color: #334155;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+            margin: 20px 0;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #e2e8f0;
+        }
+        .comment { color: #94a3b8; }
+        .string { color: #fca5a5; }
+        .method { color: #93c5fd; }
+        .tag { color: #86efac; }
+        .attr { color: #fde047; }
+        
+        ul { margin-bottom: 20px; }
+        
+        .image-box {
+            background-color: #ffffff;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-title">41. Bling de línea directa</div>
+
+    <h1>Seleccionar elementos HTML</h1>
+    
+    <p>¡Es hora de entrar en la parte divertida del DOM!</p>
+    
+    <p>El objeto <code>document</code> viene con métodos y propiedades que podemos usar para seleccionar uno o más elementos HTML.</p>
+
+    <p>Dos de los métodos más utilizados son los siguientes:</p>
+    <ul>
+        <li><code>.getElementById()</code></li>
+        <li><code>.getElementsByClassName()</code></li>
+    </ul>
+
+    <p>Todos estos métodos aceptan cadenas como parámetros, que representan un elemento que puede existir en un archivo HTML conectado.</p>
+    <p>Por ejemplo:</p>
+
+    <pre><code>&lt;<span class="tag">div</span> <span class="attr">id</span>=<span class="string">"status-update"</span> <span class="attr">class</span>=<span class="string">"post"</span>&gt;
+  &lt;<span class="tag">p</span>&gt;¡Acabo de aterrizar de mi viaje en avión! ✈️&lt;/<span class="tag">p</span>&gt;
+&lt;/<span class="tag">div</span>&gt;
+
+&lt;<span class="tag">div</span> <span class="attr">id</span>=<span class="string">"posted"</span> <span class="attr">class</span>=<span class="string">"post"</span>&gt;
+  &lt;<span class="tag">img</span> <span class="attr">src</span>=<span class="string">"https://cdn.pixabay.com/photo/2017/05/12/13/17/night-flight-2307018_640.jpg"</span> <span class="attr">alt</span>=<span class="string">"avión despegando de la pista"</span> /&gt;
+  &lt;<span class="tag">p</span>&gt;¡Estoy a punto de despegar!&lt;/<span class="tag">p</span>&gt;
+  &lt;<span class="tag">p</span>&gt;¡Qué emoción! 😅&lt;/<span class="tag">p</span>&gt;
+&lt;/<span class="tag">div</span>&gt;</code></pre>
+
+    <h2>.getElementsByClassName()</h2>
+
+    <p>Puede seleccionar varios elementos si comparten el mismo atributo <code>class</code>, utilizando el método <code>.getElementsByClassName()</code>:</p>
+
+    <pre><code>console.<span class="method">log</span>(document.<span class="method">getElementsByClassName</span>(<span class="string">"post"</span>));
+<span class="comment">// Resultado: HTMLCollection(2) [div#status-update.post, div#posted.post, status-update: div#status-update.post, posted: div#posted.post]</span></code></pre>
+
+    <p>Espera, ¿qué devolvió esto? Un <code>HTMLCollection</code>? Este objeto es similar a un array. Puedes acceder a un elemento individual de este objeto mediante índices:</p>
+
+    <pre><code>console.<span class="method">log</span>(document.<span class="method">getElementsByClassName</span>(<span class="string">"post"</span>)[<span class="string">0</span>]);
+<span class="comment">// Resultado: &lt;div id="status-update" class="post"&gt;&lt;p&gt;¡Acabo de aterrizar de mi viaje en avión! ✈️&lt;/p&gt;&lt;/div&gt;</span></code></pre>
+
+
+    <h2>.getElementById()</h2>
+
+    <p>También puede seleccionar un elemento con un atributo <code>id</code> coincidente, utilizando el método <code>.getElementById()</code>:</p>
+
+    <pre><code>console.<span class="method">log</span>(document.<span class="method">getElementById</span>(<span class="string">"posted"</span>));
+<span class="comment">/* Resultado:
+&lt;div id="posted" class="post"&gt;
+  &lt;p&gt;¡Estoy a punto de despegar!&lt;/p&gt;
+  &lt;p&gt;¡Qué emoción! 😅&lt;/p&gt;
+&lt;/div&gt;
+*/</span></code></pre>
+
+    <p>Por último, puedes usar una combinación de estos métodos si es posible. Por ejemplo, si quieres seleccionar el primer elemento <code>&lt;p&gt;</code> del segundo <code>&lt;div&gt;</code> (con un <code>id</code> de "posted"), una forma de hacerlo es con <code>.getElementById("posted")</code> seguido de <code>.querySelector("p")</code>:</p>
+
+    <pre><code>document.<span class="method">getElementById</span>(<span class="string">"posted"</span>).<span class="method">querySelector</span>(<span class="string">"p"</span>);
+<span class="comment">// Resultado: &lt;p&gt;¡Estoy a punto de despegar!&lt;/p&gt;</span></code></pre>
+
+
+    <h1>Actualización de elementos HTML</h1>
+
+    <p>Recuerda: algunos objetos contienen ciertas propiedades y métodos. Esto incluye los objetos de elemento devueltos por los métodos del objeto <code>document</code>.</p>
+    
+    <p>Dependiendo del elemento que seleccionemos, podremos acceder a su contenido con una de las siguientes propiedades:</p>
+    <ul>
+        <li><code>.innerText</code></li>
+        <li><code>.src</code></li>
+    </ul>
+
+    <h2>.innerText (texto interno)</h2>
+
+    <p>La propiedad <code>.innerText</code> devuelve el texto representado dentro de un elemento seleccionado, incluidas todas las nuevas líneas.</p>
+
+    <pre><code>console.<span class="method">log</span>(document.<span class="method">getElementById</span>(<span class="string">"posted"</span>).innerText);
+<span class="comment">// Resultado: "¡Estoy a punto de despegar!\n\n¡Qué emoción! 😅"</span></code></pre>
+
+    <p>También podemos cambiar el texto de un elemento seleccionado asignándole un nuevo valor de cadena con la propiedad <code>.innerText</code>:</p>
+
+    <pre><code><span class="method">let</span> newText = document.<span class="method">getElementById</span>(<span class="string">"posted"</span>).<span class="method">querySelector</span>(<span class="string">"p"</span>).innerText = <span class="string">"¡Estoy a punto de despegar! Es un vuelo temprano, ¡así que estoy listo para dormir! 😴"</span>;
+
+console.<span class="method">log</span>(newText);
+<span class="comment">// Resultado: ¡Estoy a punto de despegar! Es un vuelo temprano, ¡así que estoy listo para dormir! 😴</span></code></pre>
+
+
+    <h2>.src</h2>
+
+    <p>Si trabajas con un elemento de imagen <code>&lt;img&gt;</code>, puedes acceder a su atributo <code>src</code> con... ¡lo adivinaste! ¡La propiedad <code>.src</code>!</p>
+
+    <pre><code>console.<span class="method">log</span>(document.<span class="method">querySelector</span>(<span class="string">"img"</span>).src);
+<span class="comment">// Resultado: 'https://cdn.pixabay.com/photo/2017/05/12/13/17/night-flight-2307018_640.jpg'</span></code></pre>
+
+    <p>Y para cambiar la fuente de una imagen, supongamos que tenemos una cara triste que usa esto:</p>
+
+    <pre><code>console.<span class="method">log</span>(document.<span class="method">querySelector</span>(<span class="string">"img"</span>).src);
+<span class="comment">// Resultado: 'smiley1.png'</span></code></pre>
+
+    <div class="image-box">☹️</div>
+
+    <p>Podemos actualizar la propiedad <code>.src</code> de la imagen asignando una nueva cadena:</p>
+
+    <pre><code>document.<span class="method">querySelector</span>(<span class="string">"img"</span>).src = <span class="string">"smiley2.png"</span>;</code></pre>
+
+    <p>Así que ahora se verá así:</p>
+
+    <div class="image-box">🙂</div>
+
+</body>
+</html>
